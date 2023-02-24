@@ -21,6 +21,8 @@ pub fn build(b: *std.Build) void {
     });
 
     lib.install();
+
+    for (libubox_h) |header| lib.installHeader(header, b.fmt("libubox/{s}", .{header}));
 }
 
 const libubox_src = &.{
@@ -40,4 +42,25 @@ const libubox_src = &.{
     "kvlist.c",
     "ulog.c",
     "base64.c",
+};
+
+const libubox_h: []const []const u8 = &.{
+    "assert.h",
+    "avl-cmp.h",
+    "avl.h",
+    "blob.h",
+    "blobmsg.h",
+    "blobmsg_json.h",
+    "json_script.h",
+    "kvlist.h",
+    "list.h",
+    "md5.h",
+    "runqueue.h",
+    "safe_list.h",
+    "ulog.h",
+    "uloop.h",
+    "usock.h",
+    "ustream.h",
+    "utils.h",
+    "vlist.h",
 };
