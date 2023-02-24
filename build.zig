@@ -21,8 +21,12 @@ pub fn build(b: *std.Build) void {
     });
 
     lib.install();
-
-    for (libubox_h) |header| lib.installHeader(header, b.fmt("libubox/{s}", .{header}));
+    lib.installHeadersDirectoryOptions(.{
+        .source_dir = ".",
+        .install_dir = .header,
+        .install_subdir = "libubox",
+        .exclude_extensions = &.{".c", ".txt", ".sh", ".json"},
+    });
 }
 
 const libubox_src = &.{
